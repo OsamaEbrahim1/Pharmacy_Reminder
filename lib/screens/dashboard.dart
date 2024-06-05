@@ -32,11 +32,11 @@ class _DashboardState extends State<Dashboard> {
           leading: const BackButton(color: Color(0xFF295c82)),
         ),
         body: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Expiry Items By Days :',
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
@@ -49,8 +49,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 30,
-                          color: Color(0xFFee8524),
-                          child: Center(
+                          color: const Color(0xFFee8524),
+                          child: const Center(
                               child: Text(
                             "4",
                             style: TextStyle(
@@ -62,8 +62,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 100,
-                          color: Color(0xFFececec),
-                          child: Center(child: Text("expire in 1 day")),
+                          color: const Color(0xFFececec),
+                          child: const Center(child: Text("expire in 1 day")),
                         )
                       ],
                     ),
@@ -75,8 +75,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 30,
-                          color: Color(0xFF79c519),
-                          child: Center(
+                          color: const Color(0xFF79c519),
+                          child: const Center(
                               child: Text(
                             "10",
                             style: TextStyle(
@@ -88,8 +88,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 100,
-                          color: Color(0xFFececec),
-                          child: Center(child: Text("expire in 3 days")),
+                          color: const Color(0xFFececec),
+                          child: const Center(child: Text("expire in 3 days")),
                         )
                       ],
                     ),
@@ -105,8 +105,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 30,
-                          color: Color(0xFFe508cf),
-                          child: Center(
+                          color: const Color(0xFFe508cf),
+                          child: const Center(
                               child: Text(
                             "15",
                             style: TextStyle(
@@ -118,8 +118,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 100,
-                          color: Color(0xFFececec),
-                          child: Center(child: Text("expire in 7 days")),
+                          color: const Color(0xFFececec),
+                          child: const Center(child: Text("expire in 7 days")),
                         )
                       ],
                     ),
@@ -131,8 +131,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 30,
-                          color: Color(0xFF2737c6),
-                          child: Center(
+                          color: const Color(0xFF2737c6),
+                          child: const Center(
                               child: Text(
                             "20",
                             style: TextStyle(
@@ -144,8 +144,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 100,
-                          color: Color(0xFFececec),
-                          child: Center(child: Text("expire in 20 days")),
+                          color: const Color(0xFFececec),
+                          child: const Center(child: Text("expire in 20 days")),
                         )
                       ],
                     ),
@@ -159,8 +159,8 @@ class _DashboardState extends State<Dashboard> {
                     Container(
                       height: 30,
                       width: 30,
-                      color: Color(0xFFdc0d0d),
-                      child: Center(
+                      color: const Color(0xFFdc0d0d),
+                      child: const Center(
                           child: Text(
                         "29",
                         style: TextStyle(
@@ -172,18 +172,18 @@ class _DashboardState extends State<Dashboard> {
                     Container(
                       height: 30,
                       width: 100,
-                      color: Color(0xFFececec),
-                      child: Center(child: Text("expire in 30 days")),
+                      color: const Color(0xFFececec),
+                      child: const Center(child: Text("expire in 30 days")),
                     )
                   ],
                 ),
               ),
-              SizedBox(height: 20.0),
-              Text(
+              const SizedBox(height: 20.0),
+              const Text(
                 'Items Expiry Graph :',
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Center(
                 child: Container(
                   width: 300,
@@ -238,7 +238,7 @@ class _DashboardState extends State<Dashboard> {
                                   BarChartRodData(
                                       y: 30,
                                       width: 10,
-                                      colors: [Color(0xFF295c82)]),
+                                      colors: [const Color(0xFF295c82)]),
                                 ],
                               ),
                               BarChartGroupData(
@@ -247,7 +247,7 @@ class _DashboardState extends State<Dashboard> {
                                   BarChartRodData(
                                       y: 10,
                                       width: 10,
-                                      colors: [Color(0xFF295c82)]),
+                                      colors: [const Color(0xFF295c82)]),
                                 ],
                               ),
                               BarChartGroupData(
@@ -256,7 +256,7 @@ class _DashboardState extends State<Dashboard> {
                                   BarChartRodData(
                                       y: 20,
                                       width: 10,
-                                      colors: [Color(0xFF295c82)]),
+                                      colors: [const Color(0xFF295c82)]),
                                 ],
                               ),
                               BarChartGroupData(
@@ -265,7 +265,7 @@ class _DashboardState extends State<Dashboard> {
                                   BarChartRodData(
                                       y: 40,
                                       width: 10,
-                                      colors: [Color(0xFF295c82)]),
+                                      colors: [const Color(0xFF295c82)]),
                                 ],
                               ),
                               BarChartGroupData(
@@ -274,7 +274,7 @@ class _DashboardState extends State<Dashboard> {
                                   BarChartRodData(
                                       y: 27,
                                       width: 10,
-                                      colors: [Color(0xFF295c82)]),
+                                      colors: [const Color(0xFF295c82)]),
                                 ],
                               ),
                               BarChartGroupData(
@@ -283,7 +283,7 @@ class _DashboardState extends State<Dashboard> {
                                   BarChartRodData(
                                       y: 5,
                                       width: 10,
-                                      colors: [Color(0xFF295c82)]),
+                                      colors: [const Color(0xFF295c82)]),
                                 ],
                               ),
                             ],
@@ -294,14 +294,14 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              Text(
+              const Text(
                 'Nearly Expire By Category :',
                 style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 10.0),
+              const SizedBox(height: 10.0),
               Row(
                 children: [
                   Padding(
@@ -311,8 +311,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 30,
-                          color: Color(0xFFee8524),
-                          child: Center(
+                          color: const Color(0xFFee8524),
+                          child: const Center(
                               child: Text(
                             "4",
                             style: TextStyle(
@@ -324,8 +324,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 100,
-                          color: Color(0xFFececec),
-                          child: Center(child: Text("Hair Care")),
+                          color: const Color(0xFFececec),
+                          child: const Center(child: Text("Hair Care")),
                         )
                       ],
                     ),
@@ -337,8 +337,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 30,
-                          color: Color(0xFF79c519),
-                          child: Center(
+                          color: const Color(0xFF79c519),
+                          child: const Center(
                               child: Text(
                             "10",
                             style: TextStyle(
@@ -350,8 +350,8 @@ class _DashboardState extends State<Dashboard> {
                         Container(
                           height: 30,
                           width: 100,
-                          color: Color(0xFFececec),
-                          child: Center(child: Text("Pills")),
+                          color: const Color(0xFFececec),
+                          child: const Center(child: Text("Pills")),
                         )
                       ],
                     ),
@@ -369,8 +369,8 @@ class _DashboardState extends State<Dashboard> {
                           Container(
                             height: 30,
                             width: 30,
-                            color: Color(0xFFdc0d0d),
-                            child: Center(
+                            color: const Color(0xFFdc0d0d),
+                            child: const Center(
                                 child: Text(
                               "20",
                               style: TextStyle(
@@ -382,8 +382,8 @@ class _DashboardState extends State<Dashboard> {
                           Container(
                             height: 30,
                             width: 100,
-                            color: Color(0xFFececec),
-                            child: Center(child: Text("Body Care")),
+                            color: const Color(0xFFececec),
+                            child: const Center(child: Text("Body Care")),
                           )
                         ],
                       ),
@@ -401,22 +401,22 @@ class _DashboardState extends State<Dashboard> {
               if (index == 0) {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return HomePage();
+                  return const HomePage();
                 }));
               } else if (index == 1) {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return Calender();
+                  return const Calender();
                 }));
               } else if (index == 2) {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return Add();
+                  return const Add();
                 }));
               } else if (index == 3) {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) {
-                  return Settings();
+                  return const Settings();
                 }));
               }
             });
@@ -424,22 +424,22 @@ class _DashboardState extends State<Dashboard> {
           currentIndex: 0,
           unselectedFontSize: 15,
           unselectedItemColor: Colors.grey,
-          selectedItemColor: Color(0xFF295c82),
-          selectedLabelStyle: TextStyle(fontSize: 13),
+          selectedItemColor: const Color(0xFF295c82),
+          selectedLabelStyle: const TextStyle(fontSize: 13),
           items: [
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: "Home",
                 backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_month),
                 label: "Calender",
                 backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.add),
                 label: "Add",
                 backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
                 icon: Icon(Icons.settings),
                 label: "Settings",
                 backgroundColor: Color.fromARGB(255, 230, 230, 230)),
