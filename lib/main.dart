@@ -9,6 +9,7 @@ import 'package:reminder_app/core/utils/notification/local_notification_service.
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/root_screen.dart';
 import 'package:reminder_app/screens/all_items.dart';
+import 'package:reminder_app/screens/dashboard.dart';
 import 'package:reminder_app/screens/edit.dart';
 import 'package:reminder_app/screens/homepage.dart';
 import 'package:reminder_app/screens/setting.dart';
@@ -54,6 +55,7 @@ class ReminderApp extends StatelessWidget {
           Settings.id: (context) => const Settings(),
           AllItems.id: (context) => const AllItems(),
           StartUp.id: (context) => const StartUp(),
+          Dashboard.id:(context) => const Dashboard(),
         },
       ),
     );

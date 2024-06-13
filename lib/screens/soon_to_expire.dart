@@ -56,7 +56,7 @@ class _SoonToExpireState extends State<SoonToExpire> {
               ),
             ),
             body: state is SoonExpiredLoading
-                ? const CircularProgressIndicator()
+                ? const Center(child:  CircularProgressIndicator())
                 : state is SoonExpiredSuccess
                     ? CustomScrollView(
                         slivers: [

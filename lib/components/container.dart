@@ -41,7 +41,7 @@ class CustomContainer extends StatelessWidget {
                           style: const TextStyle(fontSize: 20)),
                       Text("Type: ${product.type}",
                           style: const TextStyle(fontSize: 20)),
-                      Text("Pro Date: ${product.proDate}",
+                      Text("Quantity: ${product.quantity}",
                           style: const TextStyle(fontSize: 20)),
                       Text("Expire Date: ${product.expDate}",
                           style: const TextStyle(fontSize: 20)),

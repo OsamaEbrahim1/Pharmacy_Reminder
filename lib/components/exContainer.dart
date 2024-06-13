@@ -37,7 +37,7 @@ class ExCustomContainer extends StatelessWidget {
                   children: [
                     Text("Title: ${exproducts.title}", style: TextStyle(fontSize: 20)),
                     Text("Type: ${exproducts.type}", style: TextStyle(fontSize: 20)),
-                    Text("Pro Date: ${exproducts.proDate}", style: TextStyle(fontSize: 20)),
+                    Text("Quantity: ${exproducts.quantity}", style: TextStyle(fontSize: 20)),
                     Text("Expire Date: ${exproducts.expDate}", style: TextStyle(fontSize: 20)),
                   ],
                 ),

@@ -39,7 +39,7 @@ class SoonExCustomContainer extends StatelessWidget {
                     children: [
                       Text("Title: ${soonexproducts.title}", style: const TextStyle(fontSize: 20)),
                       Text("Type: ${soonexproducts.type}", style: const TextStyle(fontSize: 20)),
-                      Text("Pro Date: ${soonexproducts.proDate}", style: const TextStyle(fontSize: 20)),
+                      Text("Quantity: ${soonexproducts.quantity}", style: const TextStyle(fontSize: 20)),
                       Text("Expire Date: ${soonexproducts.expDate}", style: const TextStyle(fontSize: 20)),
                     ],
                   ),

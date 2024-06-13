@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/screens/add_item.dart';
-import 'package:reminder_app/screens/calender.dart';
+import 'package:reminder_app/screens/create_admin.dart';
 import 'package:reminder_app/screens/homepage.dart';
 import 'package:reminder_app/screens/setting.dart';
 
@@ -22,7 +22,7 @@ class _RootScreenState extends State<RootScreen> {
   bool _isLoading = true;
   List<Widget> widgets = [
     const HomePage(),
-    const Calender(),
+    const CreateAdmin(),
     const Add(),
     const Settings(),
   ];
@@ -85,10 +85,10 @@ class _RootScreenState extends State<RootScreen> {
               ),
             ),
             NavigationDestination(
-              icon: Icon(Icons.calendar_month),
-              label: "Calender",
+              icon: Icon(Icons.admin_panel_settings_outlined),
+              label: "Admin",
               selectedIcon: Icon(
-                IconlyBold.calendar,
+                IconlyBold.profile,
               ),
             ),
             NavigationDestination(

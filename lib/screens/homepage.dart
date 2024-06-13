@@ -296,65 +296,7 @@ class _HomePageState extends State<HomePage>
                       ),
                     )
                   : Container(),
-          // bottomNavigationBar: BottomNavigationBar(
-          //   onTap: (value) {
-          //     setState(() {
-          //       currentPage = value;
-          //       switch (currentPage) {
-          //         case 0:
-          //           // No need to navigate if already on the home page
-          //           break;
-          //         case 1:
-          //           Navigator.of(context)
-          //               .push(MaterialPageRoute(builder: (context) {
-          //             return const Calender();
-          //           }));
-          //           break;
-          //         case 2:
-          //           Navigator.of(context)
-          //               .push(MaterialPageRoute(builder: (context) {
-          //             return const Add();
-          //           }));
-          //           break;
-          //         case 3:
-          //           Navigator.of(context)
-          //               .push(MaterialPageRoute(builder: (context) {
-          //             return const Settings();
-          //           }));
-          //           break;
-          //         default:
-          //           break;
-          //       }
-          //     });
-          //   },
-          //   currentIndex: currentPage,
-          //   unselectedFontSize: 15,
-          //   unselectedItemColor: Colors.grey,
-          //   selectedItemColor: const Color(0xFF295c82),
-          //   selectedLabelStyle: const TextStyle(fontSize: 13),
-          //   items: const [
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.home),
-          //       label: "Home",
-          //       backgroundColor: Color.fromARGB(255, 230, 230, 230),
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.calendar_month),
-          //       label: "Calender",
-          //       backgroundColor: Color.fromARGB(255, 230, 230, 230),
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.add),
-          //       label: "Add",
-          //       backgroundColor: Color.fromARGB(255, 230, 230, 230),
-          //     ),
-          //     BottomNavigationBarItem(
-          //       icon: Icon(Icons.settings),
-          //       label: "Settings",
-          //       backgroundColor: Color.fromARGB(255, 230, 230, 230),
-          //     ),
-          //   ],
-          // ),
+          
         );
       },
     );
