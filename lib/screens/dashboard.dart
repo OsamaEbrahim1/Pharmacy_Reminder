@@ -31,6 +31,7 @@ class _DashboardState extends State<Dashboard> {
         ),
         centerTitle: true,
         leading: const BackButton(color: Color(0xFF295c82)),
+        
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

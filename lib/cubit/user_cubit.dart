@@ -13,11 +13,13 @@ import 'package:reminder_app/cache/cache_helper.dart';
 import 'package:reminder_app/core/api/api_consumer.dart';
 import 'package:reminder_app/core/api/end_points.dart';
 import 'package:reminder_app/core/errors/exceptions.dart';
+import 'package:reminder_app/core/functions/constant.dart';
 import 'package:reminder_app/core/functions/upload_image_to_api.dart';
 import 'package:reminder_app/core/models/notification_model.dart';
 import 'package:reminder_app/core/utils/notification/local_notification_service.dart';
 import 'package:reminder_app/cubit/user_state.dart';
 import 'package:reminder_app/models/add_model.dart';
+import 'package:reminder_app/models/admin_model.dart';
 import 'package:reminder_app/models/all_products_model.dart';
 import 'package:reminder_app/models/delete_product_model.dart';
 
@@ -89,8 +91,14 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController updateCategory = TextEditingController();
   TextEditingController updateQuantity = TextEditingController();
 
+  //Admin Sign in email
+  TextEditingController adminSignInEmail = TextEditingController();
+  //Admin Sign in password
+  TextEditingController adminSignInPassword = TextEditingController();
+
   SignInModel? user; //هناخد متغير من الموديل اللي عملناه علشان نستقبل الريسبوند
   AddItemModel? product;
+  AdminLoginModel? admin;
 
   uploadProfilePic(XFile image) {
     profilePic = image;
@@ -534,6 +542,33 @@ class UserCubit extends Cubit<UserState> {
     });
 
     await prefs.setStringList('notifications', notificationStrings);
+  }
+
+
+
+  adminsignIn() async {
+    try {
+      emit(SignInLoading());
+      final response = await api.post(
+        EndPoints.admin_login,
+        isFormData: true,
+        data: {
+          ApiKey.email: adminSignInEmail.text,
+          ApiKey.password: adminSignInPassword.text,
+        },
+      );
+      admin =
+          AdminLoginModel.fromJson(response); //جواه الماسيدج والتوكين اللي راجعين
+      getIt<CacheHelper>().saveData(key: ApiKey.token, value: admin!.api_token);
+      //final decodedToken = JwtDecoder.decode(user!.token);
+//print(decodedToken['id']);
+      emit(SignInSuccess());
+    } on ServerException catch (e) {
+      emit(SignInFailure(errmessage: e.errModel.errorMessage));
+    } catch (e) {
+  emit(SignInFailure(errmessage: 'An unknown error occurred'));
+}
+    
   }
 }
 

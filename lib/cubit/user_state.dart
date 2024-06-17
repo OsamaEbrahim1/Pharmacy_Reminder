@@ -229,3 +229,15 @@ final class ResetPasswordFailure extends UserState {
   final String errMessage;
   ResetPasswordFailure({required this.errMessage});
 }
+
+
+//signIn
+final class AdminSignInSuccess extends UserState {}
+
+final class AdminSignInLoading extends UserState {}
+
+final class AdminSignInFailure extends UserState {
+  final String errmessage;
+
+  AdminSignInFailure({required this.errmessage});
+}

@@ -5,6 +5,7 @@ import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/screens/add_item.dart';
 import 'package:reminder_app/screens/create_admin.dart';
 import 'package:reminder_app/screens/homepage.dart';
+import 'package:reminder_app/screens/profile.dart';
 import 'package:reminder_app/screens/setting.dart';
 
 class RootScreen extends StatefulWidget {
@@ -22,7 +23,7 @@ class _RootScreenState extends State<RootScreen> {
   bool _isLoading = true;
   List<Widget> widgets = [
     const HomePage(),
-    const CreateAdmin(),
+    const PersonalProfile(),
     const Add(),
     const Settings(),
   ];
@@ -86,7 +87,7 @@ class _RootScreenState extends State<RootScreen> {
             ),
             NavigationDestination(
               icon: Icon(Icons.admin_panel_settings_outlined),
-              label: "Admin",
+              label: "profile",
               selectedIcon: Icon(
                 IconlyBold.profile,
               ),

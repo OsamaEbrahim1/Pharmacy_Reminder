@@ -20,6 +20,7 @@ class EndPoints {
   // static String updatedata(id) {
   //   return "updatedata/$id";
   // }
+  static String admin_login = "admin/login";
 
   static String updatedata(int id) {
     return "item/updatedata/$id";

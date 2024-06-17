@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reminder_app/screens/create_admin.dart';
 import 'package:reminder_app/screens/log_in.dart';
 import 'package:reminder_app/screens/sign_up.dart';
 
@@ -13,7 +14,7 @@ class StartUp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(children: [
       Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("images/back.jpg"), // <-- BACKGROUND IMAGE
             fit: BoxFit.cover,
@@ -21,7 +22,7 @@ class StartUp extends StatelessWidget {
         ),
       ),
       Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 120),
@@ -35,11 +36,11 @@ class StartUp extends StatelessWidget {
                     fontSize: 30,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 7,
                 ),
                 const Text(
-                  'Expiry Date Reminder.',
+                  'Expiry Date Reminder. Login As....',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 28,
@@ -62,7 +63,7 @@ class StartUp extends StatelessWidget {
                           }));
                         },
                         child: const Text(
-                          "Login",
+                          "User",
                           style: TextStyle(
                             fontSize: 25,
                             color: Colors.white,
@@ -80,11 +81,11 @@ class StartUp extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return SignUP();
+                            return CreateAdmin();
                           }));
                         },
                         child: const Text(
-                          "Signup",
+                          "Admin",
                           style: TextStyle(
                             color: Color(0xFF295c82),
                             fontSize: 25,
