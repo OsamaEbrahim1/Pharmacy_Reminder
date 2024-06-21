@@ -95,6 +95,8 @@ class UserCubit extends Cubit<UserState> {
   TextEditingController adminSignInEmail = TextEditingController();
   //Admin Sign in password
   TextEditingController adminSignInPassword = TextEditingController();
+  //Admin Sign in password
+  TextEditingController searchController = TextEditingController();
 
   SignInModel? user; //هناخد متغير من الموديل اللي عملناه علشان نستقبل الريسبوند
   AddItemModel? product;
@@ -280,7 +282,6 @@ class UserCubit extends Cubit<UserState> {
       product = AddItemModel.fromJson(response);
       await getIt<CacheHelper>().saveData(key: ApiKey.id, value: product!.id);
       emit(AddItemSuccess(message: AddItemModel.fromJson(response)));
-
       // Schedule a notification
       scheduleNotificationForProduct(
         id: product!.id,
@@ -548,7 +549,7 @@ class UserCubit extends Cubit<UserState> {
 
   adminsignIn() async {
     try {
-      emit(SignInLoading());
+      emit(AdminSignInLoading());
       final response = await api.post(
         EndPoints.admin_login,
         isFormData: true,
@@ -562,14 +563,49 @@ class UserCubit extends Cubit<UserState> {
       getIt<CacheHelper>().saveData(key: ApiKey.token, value: admin!.api_token);
       //final decodedToken = JwtDecoder.decode(user!.token);
 //print(decodedToken['id']);
-      emit(SignInSuccess());
+      emit(AdminSignInSuccess());
     } on ServerException catch (e) {
-      emit(SignInFailure(errmessage: e.errModel.errorMessage));
+      emit(AdminSignInFailure(errmessage: e.errModel.errorMessage));
     } catch (e) {
-  emit(SignInFailure(errmessage: 'An unknown error occurred'));
+  emit(AdminSignInFailure(errmessage: 'An unknown error occurred'));
 }
     
   }
+
+  adminlogOut() async {
+    try {
+      emit(AdminLogOutLoading());
+      final response = await api.post(
+        EndPoints.admin_logout,
+      );
+      emit(AdminLogOutSuccess());
+    } on ServerException catch (e) {
+      emit(AdminLogOutFailure(errmessage: e.errModel.errorMessage));
+    }
+  }
+
+
+
+
+  Future<void> search(String query)async{
+    try {
+      emit(SearchLoading());
+  final response = await api.post(
+    EndPoints.search,
+    isFormData: true,
+    data: {
+      ApiKey.search: searchController.text,
+    },
+  );
+  emit(SearchSuccess(data: response.data)); // Pass the response data to the state
+} on ServerException catch (e) {
+  emit(SearchFailure(errmessage: e.errModel.errorMessage));
+}
+  }
+
+
+
+
 }
 
 class NotificationStream {

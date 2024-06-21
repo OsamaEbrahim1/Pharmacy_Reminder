@@ -21,6 +21,8 @@ class EndPoints {
   //   return "updatedata/$id";
   // }
   static String admin_login = "admin/login";
+  static String admin_logout = "admin/logout";
+  static String search = "item/search";
 
   static String updatedata(int id) {
     return "item/updatedata/$id";
@@ -41,7 +43,9 @@ class ApiKey {
   static String email = "email";
   static String password = "password";
   static String token = "token";
+  static String api_token = "api_token";
   static String message = "message";
+  static String msg = "msg";
   static String success = "success";
   static String id = "id";
   static String name = "name";
@@ -58,4 +62,5 @@ class ApiKey {
   static String type = "type";
   static String code = "code";
   static String quantity = "quantity";
+  static String search = "search";
 }

@@ -16,7 +16,7 @@ class AdminLoginModel {
       id: jsonData['admin'][ApiKey.id] ?? 0,
       name: jsonData['admin'][ApiKey.name] ?? '',
       email: jsonData['admin'][ApiKey.email] ?? '',
-      api_token: jsonData['admin'][ApiKey.token] ?? '',
+      api_token: jsonData['admin'][ApiKey.api_token] ?? '',
     );
   }
 }

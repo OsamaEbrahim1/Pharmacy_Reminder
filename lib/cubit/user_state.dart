@@ -231,8 +231,10 @@ final class ResetPasswordFailure extends UserState {
 }
 
 
-//signIn
-final class AdminSignInSuccess extends UserState {}
+//admin signIn
+final class AdminSignInSuccess extends UserState {
+  
+}
 
 final class AdminSignInLoading extends UserState {}
 
@@ -240,4 +242,30 @@ final class AdminSignInFailure extends UserState {
   final String errmessage;
 
   AdminSignInFailure({required this.errmessage});
+}
+
+//search
+final class SearchSuccess extends UserState {
+  final dynamic data;
+  SearchSuccess({required this.data});
+}
+
+final class SearchLoading extends UserState {}
+
+final class SearchFailure extends UserState {
+  final String errmessage;
+
+  SearchFailure({required this.errmessage});
+}
+
+
+//Admin LogOut
+final class AdminLogOutSuccess extends UserState {}
+
+final class AdminLogOutLoading extends UserState {}
+
+final class AdminLogOutFailure extends UserState {
+  final String errmessage;
+
+  AdminLogOutFailure({required this.errmessage});
 }
