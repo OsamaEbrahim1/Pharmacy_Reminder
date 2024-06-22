@@ -4,6 +4,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/cubit/user_state.dart';
+import 'package:reminder_app/models/usercount_model.dart';
 import 'package:reminder_app/screens/add_item.dart';
 import 'package:reminder_app/screens/calender.dart';
 import 'package:reminder_app/screens/create_admin.dart';
@@ -13,9 +14,12 @@ import 'package:reminder_app/screens/setting.dart';
 import 'package:reminder_app/widgets/categories_list_view.dart';
 
 class Dashboard extends StatefulWidget {
-  const Dashboard({super.key});
+  const Dashboard({
+    super.key,
+    this.count,
+  });
   static String id = 'Dashboard';
-
+  final UserCountModel? count;
   @override
   State<Dashboard> createState() => _DashboardState();
 }
@@ -24,6 +28,11 @@ int index = 0;
 
 class _DashboardState extends State<Dashboard> {
   @override
+  void initState() {
+    super.initState();
+    // Fetch user count when the dashboard is initialized
+    context.read<UserCubit>().userCount();
+  }
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
@@ -39,7 +48,7 @@ class _DashboardState extends State<Dashboard> {
               return const CreateAdmin();
             }),
           );
-        } else if(state is AdminLogOutFailure) {
+        } else if (state is AdminLogOutFailure) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errmessage)));
         }
@@ -82,14 +91,15 @@ class _DashboardState extends State<Dashboard> {
                                 height: 50,
                                 width: 50,
                                 color: const Color(0xFFee8524),
-                                child: const Center(
-                                    child: Text(
-                                  "4",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 17),
-                                )),
+                                child: Center(
+                                  child: Text(
+                                    state is UserCountSuccess ? state.count.user_count.toString() : "0",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  ),
+                                ),
                               ),
                               Container(
                                 height: 50,

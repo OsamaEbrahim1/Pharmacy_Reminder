@@ -29,12 +29,14 @@ import 'package:reminder_app/models/expired_model.dart';
 import 'package:reminder_app/models/forget_model.dart';
 
 import 'package:reminder_app/models/reset_pass_model.dart';
+import 'package:reminder_app/models/search_model.dart';
 import 'package:reminder_app/models/showone_model.dart';
 import 'package:reminder_app/models/sign_in_model.dart';
 import 'package:reminder_app/models/sign_up_model.dart';
 import 'package:reminder_app/models/soonexpired.dart';
 import 'package:reminder_app/models/update_item_model.dart';
 import 'package:reminder_app/models/user_model.dart';
+import 'package:reminder_app/models/usercount_model.dart';
 import 'package:reminder_app/service/service_Locator.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -102,6 +104,7 @@ class UserCubit extends Cubit<UserState> {
   SignInModel? user; //هناخد متغير من الموديل اللي عملناه علشان نستقبل الريسبوند
   AddItemModel? product;
   AdminLoginModel? admin;
+  UserCountModel? count;
 
   uploadProfilePic(XFile image) {
     profilePic = image;
@@ -345,41 +348,6 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  // updateItem() async {
-  //   try {
-  //     emit(UpdateLoading());
-  //     var imageFile = await uploadImageToAPI(productPic!);
-  //     var formData = FormData.fromMap({
-  //       ApiKey.title: updateTitle.text,
-  //       ApiKey.pro_date: updateProDate.text,
-  //       ApiKey.exp_date: updateExpDate.text,
-  //       ApiKey.start_reminder: updateStartReminder.text,
-  //       ApiKey.code: updateCode.text,
-  //       ApiKey.description: updateDescription.text,
-  //       ApiKey.type: updateCategory.text,
-  //       ApiKey.quantity: updateQuantity.text,
-  //       ApiKey.item_image: imageFile,
-  //     });
-  //     final id = getIt<CacheHelper>().getData(key: ApiKey.id);
-
-  //     final response = await api.post(
-  //       EndPoints.updatedata(id),
-  //       data: formData,
-  //     );
-
-  //     // Update the notification
-  //     updateNotificationForProduct(
-  //       id: id.toString(),
-  //       productName: updateTitle.text,
-  //       startReminder: updateStartReminder.text,
-  //       expDate: updateExpDate.text,
-  //     );
-
-  //     emit(UpdateSuccess(message: UpdateItemModel.fromJson(response)));
-  //   } on ServerException catch (e) {
-  //     emit(UpdateFailure(errMessage: e.errModel.errorMessage));
-  //   }
-  // }
   Future<void> updateItem(int id) async {
     try {
       emit(UpdateLoading());
@@ -598,10 +566,25 @@ class UserCubit extends Cubit<UserState> {
       ApiKey.search: searchController.text,
     },
   );
-  emit(SearchSuccess(data: response.data)); // Pass the response data to the state
+  final searchResult = SearchModel.fromJson(response);
+  emit(SearchSuccess(data: searchResult)); // Pass the response data to the state
 } on ServerException catch (e) {
   emit(SearchFailure(errmessage: e.errModel.errorMessage));
 }
+  }
+
+
+  Future<void> userCount() async {
+    try {
+      emit(UserCountLoading());
+      final response = await api.get(
+        EndPoints.admin_countuser,
+      );
+      // count = UserCountModel.fromJson(response);
+      emit(UserCountSuccess(count: UserCountModel.fromJson(response)));
+    } on ServerException catch (e) {
+      emit(UserCountFailure(errmessage: e.errModel.errorMessage));
+    }
   }
 
 

@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
 import 'package:reminder_app/models/add_model.dart';
 import 'package:reminder_app/models/all_products_model.dart';
-import 'package:reminder_app/models/delete_product_model.dart';
 import 'package:reminder_app/models/edit_user_model.dart';
 import 'package:reminder_app/models/expired_model.dart';
-import 'package:reminder_app/models/log_out_model.dart';
+import 'package:reminder_app/models/search_model.dart';
 import 'package:reminder_app/models/showone_model.dart';
 import 'package:reminder_app/models/soonexpired.dart';
 import 'package:reminder_app/models/update_item_model.dart';
 import 'package:reminder_app/models/user_model.dart';
+import 'package:reminder_app/models/usercount_model.dart';
 
 class UserState {}
 
@@ -230,11 +229,8 @@ final class ResetPasswordFailure extends UserState {
   ResetPasswordFailure({required this.errMessage});
 }
 
-
 //admin signIn
-final class AdminSignInSuccess extends UserState {
-  
-}
+final class AdminSignInSuccess extends UserState {}
 
 final class AdminSignInLoading extends UserState {}
 
@@ -246,7 +242,7 @@ final class AdminSignInFailure extends UserState {
 
 //search
 final class SearchSuccess extends UserState {
-  final dynamic data;
+  final SearchModel data;
   SearchSuccess({required this.data});
 }
 
@@ -258,7 +254,6 @@ final class SearchFailure extends UserState {
   SearchFailure({required this.errmessage});
 }
 
-
 //Admin LogOut
 final class AdminLogOutSuccess extends UserState {}
 
@@ -268,4 +263,18 @@ final class AdminLogOutFailure extends UserState {
   final String errmessage;
 
   AdminLogOutFailure({required this.errmessage});
+}
+
+//user count
+final class UserCountSuccess extends UserState {
+  final UserCountModel count;
+  UserCountSuccess({required this.count});
+}
+
+final class UserCountLoading extends UserState {}
+
+final class UserCountFailure extends UserState {
+  final String errmessage;
+
+  UserCountFailure({required this.errmessage});
 }

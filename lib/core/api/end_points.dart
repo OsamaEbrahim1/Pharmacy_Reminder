@@ -68,4 +68,6 @@ class ApiKey {
   static String code = "code";
   static String quantity = "quantity";
   static String search = "search";
+
+  static String user_count = "user_count";
 }

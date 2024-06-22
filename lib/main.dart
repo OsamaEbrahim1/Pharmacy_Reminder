@@ -55,7 +55,7 @@ class ReminderApp extends StatelessWidget {
           Settings.id: (context) => const Settings(),
           AllItems.id: (context) => const AllItems(),
           StartUp.id: (context) => const StartUp(),
-          Dashboard.id:(context) => const Dashboard(),
+          
         },
       ),
     );
