@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import 'package:reminder_app/cache/cache_helper.dart';
 import 'package:reminder_app/core/api/api_consumer.dart';
@@ -560,9 +561,9 @@ class UserCubit extends Cubit<UserState> {
       );
       admin =
           AdminLoginModel.fromJson(response); //جواه الماسيدج والتوكين اللي راجعين
-      getIt<CacheHelper>().saveData(key: ApiKey.token, value: admin!.api_token);
-      //final decodedToken = JwtDecoder.decode(user!.token);
-//print(decodedToken['id']);
+      getIt<CacheHelper>().saveData(key: ApiKey.api_token, value: admin!.api_token);
+      //final decodedToken = JwtDecoder.decode(admin!.api_token);
+      print(admin!.id);
       emit(AdminSignInSuccess());
     } on ServerException catch (e) {
       emit(AdminSignInFailure(errmessage: e.errModel.errorMessage));

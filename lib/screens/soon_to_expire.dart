@@ -36,102 +36,52 @@ class _SoonToExpireState extends State<SoonToExpire> {
       },
       builder: (context, state) {
         return Scaffold(
-            appBar: AppBar(
-              backgroundColor: const Color.fromARGB(255, 244, 243, 243),
-              title: const Text(
-                "SoonToExpired",
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.black,
-                ),
-              ),
-              centerTitle: true,
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Color(0xFF295c82)),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, RootScreen.id,
-                      arguments: BlocProvider.of<UserCubit>(context)
-                          .getUserProfile()); // Navigate back to the previous screen
-                },
+          appBar: AppBar(
+            backgroundColor: const Color.fromARGB(255, 244, 243, 243),
+            title: const Text(
+              "SoonToExpired",
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.black,
               ),
             ),
-            body: state is SoonExpiredLoading
-                ? const Center(child:  CircularProgressIndicator())
-                : state is SoonExpiredSuccess
-                    ? CustomScrollView(
-                        slivers: [
-                          SliverToBoxAdapter(
-                            child: Column(
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(12),
-                                  child: SearchField(),
-                                ),
-                                Column(
-                                  children: state.soonexproducts.data
-                                      .map((soonexproduct) {
-                                    return SoonExCustomContainer(
-                                      soonexproducts: soonexproduct,
-                                    );
-                                  }).toList(),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      )
-                    : Container(),
-            bottomNavigationBar: BottomNavigationBar(
-              onTap: (value) {
-                setState(() {
-                  index = value;
-                  if (index == 0) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const HomePage();
-                    }));
-                  } else if (index == 1) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const Calender();
-                    }));
-                  } else if (index == 2) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const Add();
-                    }));
-                  } else if (index == 3) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const Settings();
-                    }));
-                  }
-                });
+            centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Color(0xFF295c82)),
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, RootScreen.id,
+                    arguments: BlocProvider.of<UserCubit>(context)
+                        .getUserProfile()); // Navigate back to the previous screen
               },
-              currentIndex: 0,
-              unselectedFontSize: 15,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: const Color(0xFF295c82),
-              selectedLabelStyle: const TextStyle(fontSize: 13),
-              items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: "Home",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.calendar_month),
-                    label: "Calender",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.add),
-                    label: "Add",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: "Settings",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-              ],
-            ));
+            ),
+          ),
+          body: state is SoonExpiredLoading
+              ? const Center(child: CircularProgressIndicator())
+              : state is SoonExpiredSuccess
+                  ? CustomScrollView(
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Column(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(12),
+                                child: SearchField(),
+                              ),
+                              Column(
+                                children: state.soonexproducts.data
+                                    .map((soonexproduct) {
+                                  return SoonExCustomContainer(
+                                    soonexproducts: soonexproduct,
+                                  );
+                                }).toList(),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    )
+                  : Container(),
+        );
       },
     );
   }

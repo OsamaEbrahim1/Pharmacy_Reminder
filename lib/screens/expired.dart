@@ -54,7 +54,7 @@ class _ExpiredState extends State<Expired> {
               ),
             ),
             body: state is ExpiredLoading
-                ? const CircularProgressIndicator()
+                ? const Center(child:  CircularProgressIndicator())
                 : state is ExpiredSuccess
                     ? CustomScrollView(
                         slivers: [
@@ -79,57 +79,7 @@ class _ExpiredState extends State<Expired> {
                         ],
                       )
                     : Container(),
-            bottomNavigationBar: BottomNavigationBar(
-              onTap: (value) {
-                setState(() {
-                  index = value;
-                  if (index == 0) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const HomePage();
-                    }));
-                  } else if (index == 1) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const Calender();
-                    }));
-                  } else if (index == 2) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const Add();
-                    }));
-                  } else if (index == 3) {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const Settings();
-                    }));
-                  }
-                });
-              },
-              currentIndex: 0,
-              unselectedFontSize: 15,
-              unselectedItemColor: Colors.grey,
-              selectedItemColor: const Color(0xFF295c82),
-              selectedLabelStyle: const TextStyle(fontSize: 13),
-              items: const [
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: "Home",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.calendar_month),
-                    label: "Calender",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.add),
-                    label: "Add",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: "Settings",
-                    backgroundColor: Color.fromARGB(255, 230, 230, 230)),
-              ],
-            ));
+            );
       },
     );
   }

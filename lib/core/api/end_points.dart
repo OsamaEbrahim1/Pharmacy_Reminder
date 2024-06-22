@@ -17,12 +17,17 @@ class EndPoints {
   static String allcategory = "item/allcategory";
   static String expire = "item/expire";
   static String soonexpire = "item/soonexpire";
-  // static String updatedata(id) {
-  //   return "updatedata/$id";
-  // }
+
+  
   static String admin_login = "admin/login";
   static String admin_logout = "admin/logout";
   static String search = "item/search";
+  static String admin_countuser = "admin/countUsers";
+  static String admin_getAllUsers = "admin/getAllUsers";
+  static String admin_latestUsers = "admin/latestUsers";
+  static String admin_countitem = "admin/countItems";
+  static String admin_latestItems = "admin/latestItems";
+  
 
   static String updatedata(int id) {
     return "item/updatedata/$id";

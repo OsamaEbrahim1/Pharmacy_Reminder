@@ -31,7 +31,7 @@ class _DashboardState extends State<Dashboard> {
         if (state is AdminLogOutSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('success'),
+              content: Text('Logged out success'),
             ),
           );
           Navigator.of(context).pushReplacement(

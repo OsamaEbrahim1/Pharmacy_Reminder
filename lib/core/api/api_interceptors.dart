@@ -9,6 +9,9 @@ class ApiInterceptors extends Interceptor {
     options.headers['Authorization'] =
         getIt<CacheHelper>().getData(key: ApiKey.token);
 
+        options.headers['auth_token'] =
+        getIt<CacheHelper>().getData(key: ApiKey.api_token);
+
         //  CacheHelper().getData(key: ApiKey.token) != null
         //     ? CacheHelper().getData(key: ApiKey.token)
         //     : null;

@@ -44,7 +44,7 @@ class ReminderApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => UserCubit(DioConsumer(dio: Dio()))..getUserProfile(),
+      create: (context) => UserCubit(DioConsumer(dio: Dio())),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: startWidget,
