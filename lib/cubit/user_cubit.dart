@@ -22,6 +22,7 @@ import 'package:reminder_app/cubit/user_state.dart';
 import 'package:reminder_app/models/add_model.dart';
 import 'package:reminder_app/models/admin_model.dart';
 import 'package:reminder_app/models/all_products_model.dart';
+import 'package:reminder_app/models/all_users_model.dart';
 import 'package:reminder_app/models/delete_product_model.dart';
 
 import 'package:reminder_app/models/edit_user_model.dart';
@@ -554,8 +555,6 @@ class UserCubit extends Cubit<UserState> {
   }
 
 
-
-
   Future<void> search(String query)async{
     try {
       emit(SearchLoading());
@@ -587,7 +586,18 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-
+  Future<void> allusers() async {
+    try {
+      emit(AllUsersLoading());
+      final response = await api.get(
+        EndPoints.admin_getAllUsers,
+      );
+      // count = UserCountModel.fromJson(response);
+      emit(AllUsersSuccess(users: List<AllUsersModel>.from(response.map((x) => AllUsersModel.fromJson(x)))));
+    } on ServerException catch (e) {
+      emit(AllUsersFailure(errmessage: e.errModel.errorMessage));
+    }
+  }
 
 
 }

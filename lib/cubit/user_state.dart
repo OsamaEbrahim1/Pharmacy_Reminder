@@ -1,5 +1,6 @@
 import 'package:reminder_app/models/add_model.dart';
 import 'package:reminder_app/models/all_products_model.dart';
+import 'package:reminder_app/models/all_users_model.dart';
 import 'package:reminder_app/models/edit_user_model.dart';
 import 'package:reminder_app/models/expired_model.dart';
 import 'package:reminder_app/models/search_model.dart';
@@ -277,4 +278,19 @@ final class UserCountFailure extends UserState {
   final String errmessage;
 
   UserCountFailure({required this.errmessage});
+}
+
+
+//all users
+final class AllUsersSuccess extends UserState {
+  final List<AllUsersModel> users;
+  AllUsersSuccess({required this.users});
+}
+
+final class AllUsersLoading extends UserState {}
+
+final class AllUsersFailure extends UserState {
+  final String errmessage;
+
+  AllUsersFailure({required this.errmessage});
 }

@@ -70,4 +70,5 @@ class ApiKey {
   static String search = "search";
 
   static String user_count = "user_count";
+  static String all_users = "all_users";
 }
