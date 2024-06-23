@@ -51,8 +51,9 @@ class LogIn extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.transparent,
-            elevation: 0,
+            elevation: 0.5,
             automaticallyImplyLeading: false,
+            leading: const BackButton(color: Color(0xFF295c82)),
           ),
           body: SingleChildScrollView(
             child: Form(

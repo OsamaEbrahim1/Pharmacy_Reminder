@@ -3,6 +3,7 @@ import 'package:reminder_app/models/all_products_model.dart';
 import 'package:reminder_app/models/all_users_model.dart';
 import 'package:reminder_app/models/edit_user_model.dart';
 import 'package:reminder_app/models/expired_model.dart';
+import 'package:reminder_app/models/latest_items_model.dart';
 import 'package:reminder_app/models/search_model.dart';
 import 'package:reminder_app/models/showone_model.dart';
 import 'package:reminder_app/models/soonexpired.dart';
@@ -293,4 +294,19 @@ final class AllUsersFailure extends UserState {
   final String errmessage;
 
   AllUsersFailure({required this.errmessage});
+}
+
+
+//all users
+final class LatestItemsSuccess extends UserState {
+  final List<LatestItemsModel> items;
+  LatestItemsSuccess({required this.items});
+}
+
+final class LatestItemsLoading extends UserState {}
+
+final class LatestItemsFailure extends UserState {
+  final String errmessage;
+
+  LatestItemsFailure({required this.errmessage});
 }

@@ -26,9 +26,9 @@ class _DashboardState extends State<Dashboard> {
 void initState() {
   super.initState();
   // Fetch user count and all users concurrently when the dashboard is initialized
-  final userCubit = BlocProvider.of<UserCubit>(context);
-    userCubit.userCount(); // Start fetching user count
+  final userCubit = BlocProvider.of<UserCubit>(context); // Start fetching user count
     userCubit.allusers(); // Start fetching all users
+    userCubit.latestItems();
 }
 
   @override
@@ -91,7 +91,7 @@ void initState() {
                                 color: const Color(0xFFee8524),
                                 child: Center(
                                   child: Text(
-                                    state is UserCountSuccess ? state.count.user_count.toString() : "0",
+                                    state is AllUsersSuccess ? state.users.length.toString() : "0",
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -307,7 +307,7 @@ void initState() {
                                   label: Expanded(
                                       child: Center(child: Text('Delete')))),
                             ],
-                            rows:state is AllUsersSuccess ? state.users.map<DataRow>((user) {
+                            rows:state is AllUsersSuccess ? state.users.take(4).map<DataRow>((user) {
                   return DataRow(cells: [
                     DataCell(Text(user.name)),
                     DataCell(Text(user.email)),
@@ -349,64 +349,29 @@ void initState() {
                                       child: Center(child: Text('Name')))),
                               DataColumn(
                                   label: Expanded(
-                                      child: Center(child: Text('Image')))),
+                                      child: Center(child: Text('quantity')))),
                               DataColumn(
                                   label: Expanded(
-                                      child: Center(child: Text('Type')))),
+                                      child: Center(child: Text('code')))),
                               DataColumn(
                                   label: Expanded(
                                       child: Center(child: Text('Delete')))),
                             ],
-                            rows: const [
-                              DataRow(cells: [
-                                DataCell(Text('panadol')),
-                                DataCell(Text('image')),
-                                DataCell(Text('Pills')),
-                                DataCell(
-                                  Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                    size: 24,
-                                  ),
-                                ),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text('Cogestal')),
-                                DataCell(Text('image')),
-                                DataCell(Text('syrup')),
-                                DataCell(
-                                  Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                    size: 24,
-                                  ),
-                                ),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text('Cogestal')),
-                                DataCell(Text('image')),
-                                DataCell(Text('syrup')),
-                                DataCell(
-                                  Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                    size: 24,
-                                  ),
-                                ),
-                              ]),
-                              DataRow(cells: [
-                                DataCell(Text('Cogestal')),
-                                DataCell(Text('image')),
-                                DataCell(Text('Pills')),
-                                DataCell(
-                                  Icon(
-                                    Icons.delete,
-                                    color: Colors.red,
-                                    size: 24,
-                                  ),
-                                ),
-                              ]),
-                            ],
+                            rows:state is LatestItemsSuccess ? state.items.map<DataRow>((item) {
+                  return DataRow(cells: [
+                    DataCell(Text(item.title)),
+                    DataCell(Text(item.quantity.toString())),
+                    DataCell(Text(item.code.toString())),
+                    DataCell(
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red, size: 24),
+                        onPressed: () {
+                          // Handle delete action
+                        },
+                      ),
+                    ),
+                  ]);
+                }).toList() : [],
                           ),
                         ))
                       ],

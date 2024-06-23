@@ -28,6 +28,7 @@ import 'package:reminder_app/models/delete_product_model.dart';
 import 'package:reminder_app/models/edit_user_model.dart';
 import 'package:reminder_app/models/expired_model.dart';
 import 'package:reminder_app/models/forget_model.dart';
+import 'package:reminder_app/models/latest_items_model.dart';
 
 import 'package:reminder_app/models/reset_pass_model.dart';
 import 'package:reminder_app/models/search_model.dart';
@@ -596,6 +597,19 @@ class UserCubit extends Cubit<UserState> {
       emit(AllUsersSuccess(users: List<AllUsersModel>.from(response.map((x) => AllUsersModel.fromJson(x)))));
     } on ServerException catch (e) {
       emit(AllUsersFailure(errmessage: e.errModel.errorMessage));
+    }
+  }
+
+  Future<void> latestItems() async {
+    try {
+      emit(LatestItemsLoading());
+      final response = await api.get(
+        EndPoints.admin_latestItems,
+      );
+      // count = UserCountModel.fromJson(response);
+      emit(LatestItemsSuccess(items: List<LatestItemsModel>.from(response.map((x) => LatestItemsModel.fromJson(x)))));
+    } on ServerException catch (e) {
+      emit(LatestItemsFailure(errmessage: e.errModel.errorMessage));
     }
   }
 
