@@ -107,6 +107,7 @@ class UserCubit extends Cubit<UserState> {
   AddItemModel? product;
   AdminLoginModel? admin;
   UserCountModel? count;
+  LatestItemsModel? items;
 
   uploadProfilePic(XFile image) {
     profilePic = image;
@@ -516,8 +517,6 @@ class UserCubit extends Cubit<UserState> {
     await prefs.setStringList('notifications', notificationStrings);
   }
 
-
-
   adminsignIn() async {
     try {
       emit(AdminSignInLoading());
@@ -529,18 +528,18 @@ class UserCubit extends Cubit<UserState> {
           ApiKey.password: adminSignInPassword.text,
         },
       );
-      admin =
-          AdminLoginModel.fromJson(response); //جواه الماسيدج والتوكين اللي راجعين
-      getIt<CacheHelper>().saveData(key: ApiKey.api_token, value: admin!.api_token);
+      admin = AdminLoginModel.fromJson(
+          response); //جواه الماسيدج والتوكين اللي راجعين
+      getIt<CacheHelper>()
+          .saveData(key: ApiKey.api_token, value: admin!.api_token);
       //final decodedToken = JwtDecoder.decode(admin!.api_token);
       print(admin!.id);
       emit(AdminSignInSuccess());
     } on ServerException catch (e) {
       emit(AdminSignInFailure(errmessage: e.errModel.errorMessage));
     } catch (e) {
-  emit(AdminSignInFailure(errmessage: 'An unknown error occurred'));
-}
-    
+      emit(AdminSignInFailure(errmessage: 'An unknown error occurred'));
+    }
   }
 
   adminlogOut() async {
@@ -555,24 +554,23 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-
-  Future<void> search(String query)async{
+  Future<void> search(String query) async {
     try {
       emit(SearchLoading());
-  final response = await api.post(
-    EndPoints.search,
-    isFormData: true,
-    data: {
-      ApiKey.search: searchController.text,
-    },
-  );
-  final searchResult = SearchModel.fromJson(response);
-  emit(SearchSuccess(data: searchResult)); // Pass the response data to the state
-} on ServerException catch (e) {
-  emit(SearchFailure(errmessage: e.errModel.errorMessage));
-}
+      final response = await api.post(
+        EndPoints.search,
+        isFormData: true,
+        data: {
+          ApiKey.search: searchController.text,
+        },
+      );
+      final searchResult = SearchModel.fromJson(response);
+      emit(SearchSuccess(
+          data: searchResult)); // Pass the response data to the state
+    } on ServerException catch (e) {
+      emit(SearchFailure(errmessage: e.errModel.errorMessage));
+    }
   }
-
 
   Future<void> userCount() async {
     try {
@@ -594,7 +592,9 @@ class UserCubit extends Cubit<UserState> {
         EndPoints.admin_getAllUsers,
       );
       // count = UserCountModel.fromJson(response);
-      emit(AllUsersSuccess(users: List<AllUsersModel>.from(response.map((x) => AllUsersModel.fromJson(x)))));
+      emit(AllUsersSuccess(
+          users: List<AllUsersModel>.from(
+              response.map((x) => AllUsersModel.fromJson(x)))));
     } on ServerException catch (e) {
       emit(AllUsersFailure(errmessage: e.errModel.errorMessage));
     }
@@ -606,14 +606,33 @@ class UserCubit extends Cubit<UserState> {
       final response = await api.get(
         EndPoints.admin_latestItems,
       );
-      // count = UserCountModel.fromJson(response);
-      emit(LatestItemsSuccess(items: List<LatestItemsModel>.from(response.map((x) => LatestItemsModel.fromJson(x)))));
+      
+      emit(LatestItemsSuccess(
+          items: List<LatestItemsModel>.from(
+              response.map((x) => LatestItemsModel.fromJson(x)))));
+              items = LatestItemsModel.fromJson(response);
+      await getIt<CacheHelper>().saveData(key: ApiKey.id, value: items!.id);
     } on ServerException catch (e) {
       emit(LatestItemsFailure(errmessage: e.errModel.errorMessage));
     }
   }
 
+  Future<void> deleteItem(int id) async {
+    try {
+      emit(DeleteItemLoading());
+      await api.delete(EndPoints.deleteItem(id));
+      emit(DeleteItemSuccess());
+    } on ServerException catch (e) {
+      emit(DeleteItemFailure(errMessage: e.errModel.errorMessage));
+    } catch (e) {
+      emit(DeleteFailure(errMessage: 'An unknown error occurred'));
+    }
+  }
 
+
+
+
+  
 }
 
 class NotificationStream {

@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/cubit/user_state.dart';
+import 'package:reminder_app/models/all_products_model.dart';
 import 'package:reminder_app/models/all_users_model.dart';
+import 'package:reminder_app/models/latest_items_model.dart';
 import 'package:reminder_app/models/usercount_model.dart';
+import 'package:reminder_app/screens/admin.dart';
 import 'package:reminder_app/screens/create_admin.dart';
 
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
     super.key,
-    this.count, this.users,
+    this.count, this.users, 
   });
   static String id = 'Dashboard';
   final UserCountModel? count;
   final AllUsersModel? users;
+
   @override
   State<Dashboard> createState() => _DashboardState();
 }
@@ -27,7 +31,7 @@ void initState() {
   super.initState();
   // Fetch user count and all users concurrently when the dashboard is initialized
   final userCubit = BlocProvider.of<UserCubit>(context); // Start fetching user count
-    userCubit.allusers(); // Start fetching all users
+    //userCubit.allusers(); // Start fetching all users
     userCubit.latestItems();
 }
 
@@ -50,6 +54,15 @@ void initState() {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(state.errmessage)));
         }
+        if (state is DeleteItemSuccess) {
+          BlocProvider.of<UserCubit>(context).latestItems();
+        }
+        if (state is DeleteItemFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errMessage)),
+          );
+        }
+        
       },
       builder: (context, state) {
         return Scaffold(
@@ -99,12 +112,17 @@ void initState() {
                                   ),
                                 ),
                               ),
-                              Container(
-                                height: 50,
-                                width: 150,
-                                color: const Color(0xFFececec),
-                                child:
-                                    const Center(child: Text("Number of Uers")),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).pushNamed(Admin.id);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 150,
+                                  color: const Color(0xFFececec),
+                                  child:
+                                      const Center(child: Text("Number of Uers")),
+                                ),
                               )
                             ],
                           ),
@@ -367,6 +385,7 @@ void initState() {
                         icon: const Icon(Icons.delete, color: Colors.red, size: 24),
                         onPressed: () {
                           // Handle delete action
+                          context.read<UserCubit>().deleteItem(item.id);
                         },
                       ),
                     ),

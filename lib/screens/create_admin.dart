@@ -12,7 +12,7 @@ import 'package:reminder_app/screens/setting.dart';
 
 class CreateAdmin extends StatefulWidget {
   const CreateAdmin({super.key});
-
+static String id = 'CreateAdmin';
   @override
   State<CreateAdmin> createState() => _CreateAdminState();
 }

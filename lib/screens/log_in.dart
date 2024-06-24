@@ -11,6 +11,7 @@ import 'package:reminder_app/root_screen.dart';
 import 'package:reminder_app/screens/reset_password.dart';
 import 'package:reminder_app/screens/sign_up.dart';
 import 'package:reminder_app/service/service_Locator.dart';
+import 'package:reminder_app/widgets/startup.dart';
 
 class LogIn extends StatelessWidget {
   LogIn({super.key});
@@ -53,7 +54,9 @@ class LogIn extends StatelessWidget {
             backgroundColor: Colors.transparent,
             elevation: 0.5,
             automaticallyImplyLeading: false,
-            leading: const BackButton(color: Color(0xFF295c82)),
+            leading:  BackButton(color: Color(0xFF295c82),onPressed: () {
+              Navigator.of(context).pushNamed(StartUp.id);
+            },),
           ),
           body: SingleChildScrollView(
             child: Form(

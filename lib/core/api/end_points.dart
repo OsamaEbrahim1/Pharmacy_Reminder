@@ -40,6 +40,10 @@ class EndPoints {
   static String delete(int id) {
     return "item/delete/$id";
   }
+
+  static String deleteItem(int id) {
+    return "admin/delete/$id";
+  }
 }
 
 class ApiKey {

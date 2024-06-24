@@ -11,15 +11,16 @@ class LatestItemsModel {
   final String title;
   final int quantity;
   final int code;
-
+  final int id;
   
-  LatestItemsModel({required this.quantity,required this.code, required this.title});
+  LatestItemsModel({required this.quantity,required this.code, required this.title, required this.id});
 
   factory LatestItemsModel.fromJson(Map<String, dynamic> jsonData) {
     return LatestItemsModel(
         title: jsonData[ApiKey.title] ?? " ",
         quantity: jsonData[ApiKey.quantity] ?? 0,
         code: jsonData[ApiKey.code] ?? 0,
+        id: jsonData[ApiKey.id] ?? 0
         );
   }
 }

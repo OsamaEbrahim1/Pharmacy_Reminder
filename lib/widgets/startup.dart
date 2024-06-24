@@ -79,10 +79,7 @@ class StartUp extends StatelessWidget {
                           minimumSize: Size(150, 50),
                         ),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return CreateAdmin();
-                          }));
+                          Navigator.pushNamed(context, CreateAdmin.id);
                         },
                         child: const Text(
                           "Admin",

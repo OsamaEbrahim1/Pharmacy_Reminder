@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reminder_app/components/container.dart';
 import 'package:reminder_app/components/searchfield.dart';
 import 'package:reminder_app/components/soonContainer.dart';
+import 'package:reminder_app/components/soonSearchfield.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/cubit/user_state.dart';
 import 'package:reminder_app/root_screen.dart';
@@ -65,7 +66,7 @@ class _SoonToExpireState extends State<SoonToExpire> {
                             children: [
                               const Padding(
                                 padding: EdgeInsets.all(12),
-                                child: SearchField(),
+                                child: SoonSearchField(),
                               ),
                               Column(
                                 children: state.soonexproducts.data

@@ -310,3 +310,16 @@ final class LatestItemsFailure extends UserState {
 
   LatestItemsFailure({required this.errmessage});
 }
+
+
+
+//delete Item
+final class DeleteItemSuccess extends UserState {}
+
+final class DeleteItemLoading extends UserState {}
+
+final class DeleteItemFailure extends UserState {
+  final String errMessage;
+
+  DeleteItemFailure({required this.errMessage});
+}

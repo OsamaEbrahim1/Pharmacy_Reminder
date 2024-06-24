@@ -1,68 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reminder_app/components/buttons.dart';
+import 'package:reminder_app/cubit/user_cubit.dart';
+import 'package:reminder_app/cubit/user_state.dart';
 import 'package:reminder_app/screens/create_admin.dart';
 
-class Admin extends StatelessWidget {
+class Admin extends StatefulWidget {
+  static String id = 'Admin';
   const Admin({super.key});
 
   @override
+  State<Admin> createState() => _AdminState();
+}
+
+class _AdminState extends State<Admin> {
+
+
+void initState() {
+  super.initState();
+  // Fetch user count and all users concurrently when the dashboard is initialized
+  final userCubit = BlocProvider.of<UserCubit>(context); // Start fetching user count
+    userCubit.allusers(); // Start fetching all users
+}
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 244, 243, 243),
-        title: const Text(
-          "Admin",
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.black,
+    return BlocConsumer<UserCubit, UserState>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: const Color.fromARGB(255, 244, 243, 243),
+            title: const Text(
+              "Users",
+              style: TextStyle(
+                fontSize: 25,
+                color: Colors.black,
+              ),
+            ),
+            centerTitle: true,
+            leading: const BackButton(color: Color(0xFF295c82)),
           ),
-        ),
-        centerTitle: true,
-        leading: const BackButton(color: Color(0xFF295c82)),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            DataTable(
-              columns: [
-                DataColumn(label: Text('#')),
-                DataColumn(label: Text('UserName')),
-                DataColumn(label: Text('Email')),
-              ],
-              rows: [
-                DataRow(cells: [
-                  DataCell(Text('1')),
-                  DataCell(Text('John')),
-                  DataCell(Text('John@gmail.com')),
-                ]),
-                DataRow(cells: [
-                  DataCell(Text('2')),
-                  DataCell(Text('John')),
-                  DataCell(Text('John@gmail.com')),
-                ]),
-                DataRow(cells: [
-                  DataCell(Text('3')),
-                  DataCell(Text('John')),
-                  DataCell(Text('John@gmail.com')),
-                ]),
+          body: Center(
+            child: Column(
+              children: [
+                DataTable(
+                  columns: const [
+                    DataColumn(
+                        label: Expanded(child: Center(child: Text('Name')))),
+                    DataColumn(
+                        label: Expanded(child: Center(child: Text('Email')))),
+                    DataColumn(
+                        label: Expanded(child: Center(child: Text('Delete')))),
+                  ],
+                  rows: state is AllUsersSuccess
+                      ? state.users.map<DataRow>((user) {
+                          return DataRow(cells: [
+                            DataCell(Text(user.name)),
+                            DataCell(Text(user.email)),
+                            DataCell(
+                              IconButton(
+                                icon: const Icon(Icons.delete,
+                                    color: Colors.red, size: 24),
+                                onPressed: () {
+                                  // Handle delete action
+                                },
+                              ),
+                            ),
+                          ]);
+                        }).toList()
+                      : [],
+                ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(50),
-              child: CustomButton(
-                title: 'Create an Admin',
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) {
-                      return CreateAdmin();
-                    }),
-                  );
-                },
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }
