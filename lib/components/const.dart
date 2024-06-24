@@ -33,6 +33,51 @@ class _HomePageState extends State<HomePage>
     BlocProvider.of<UserCubit>(context).getUserProfile();
   }
 
+  // Future<void> fetchFCT() async {
+  //   try {
+  //     Future.wait({
+  //       context.read<UserCubit>().getUserProfile(),
+  //       context.read<UserCubit>().allData(),
+  //     });
+  //     // Future.wait({
+  //     //   cartProvider.fetchCart(),
+  //     //   wishlistProvider.fetchWishlist(),
+  //     //   ordersProvider.fetchOrder(),
+  //     // });
+  //   } catch (e) {
+  //     rethrow;
+  //   } finally {
+  //     _isLoading = false;
+  //   }
+  // }
+
+  // @override
+  // void didChangeDependencies() {
+  //   if (_isLoading) {
+  //     fetchFCT();
+  //   }
+  //   super.didChangeDependencies();
+  // }
+
+  // @override
+  // void initState() {
+  //   var allData = BlocProvider.of<UserCubit>(context).allData();
+  //   super.initState();
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //   // context.read<UserCubit>().getUserProfile();
+  //   // Re-fetch data when dependencies change
+  //   // await context.read<UserCubit>().getUserProfile();
+  //   try {
+  //     Future.wait({
+  // context.read<UserCubit>().getUserProfile(),
+  // context.read<UserCubit>().allData(),
+  //     });
+  //   } catch (e) {
+  //     rethrow;
+  //   }
+  // }
 
   @override
   bool get wantKeepAlive => true;
@@ -232,10 +277,10 @@ class _HomePageState extends State<HomePage>
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return const NotificationsScreen();
-                      }));
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(builder: (context) {
+                                      return const NotificationsScreen();
+                                    }));
                                   },
                                   child: const Padding(
                                     padding: EdgeInsets.only(left: 120),
@@ -257,7 +302,6 @@ class _HomePageState extends State<HomePage>
                       ),
                     )
                   : Container(),
-          
         );
       },
     );

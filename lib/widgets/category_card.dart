@@ -13,6 +13,8 @@ class CategoryCard extends StatelessWidget {
         height: 70,
         width: 190,
         decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(category.categoryImage), fit: BoxFit.fill),
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: const Color(0xFF295c82), width: 1.5),
         ),
@@ -24,7 +26,7 @@ class CategoryCard extends StatelessWidget {
               child: Center(
                 child: Text(category.categoryName,
                     style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 25,
                         color: Colors.black,
                         fontWeight: FontWeight.bold)),
               ),
@@ -32,15 +34,15 @@ class CategoryCard extends StatelessWidget {
             Row(
               children: [
                 const Padding(
-                  padding: EdgeInsets.only(left: 5, right: 0),
+                  padding: EdgeInsets.only(left: 60, right: 0),
                   child: Icon(Icons.trending_up,
-                      size: 25, color: Color(0xFF295c82)),
+                      size: 30, color: Color(0xFF295c82)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 5),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Text(category.categoryPrecent,
                       style: const TextStyle(
-                        fontSize: 18,
+                        fontSize: 20,
                         color: Colors.black,
                       )),
                 ),

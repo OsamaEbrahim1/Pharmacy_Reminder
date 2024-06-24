@@ -9,21 +9,21 @@ class categoris_list_view extends StatelessWidget {
 
   final List<CategoryModel> Categories = const [
     CategoryModel(
-      categoryName: "Pills",
-      categoryPrecent: "20%",
-    ),
+        categoryName: "Pills",
+        categoryPrecent: "20%",
+        categoryImage: "images/pills.png"),
     CategoryModel(
-      categoryName: "Injections",
-      categoryPrecent: "15%",
-    ),
+        categoryName: "Injections",
+        categoryPrecent: "15%",
+        categoryImage: "images/injections.png"),
     CategoryModel(
-      categoryName: "syrup",
-      categoryPrecent: "30%",
-    ),
+        categoryName: "syrup",
+        categoryPrecent: "30%",
+        categoryImage: "images/syrup.png"),
     CategoryModel(
-      categoryName: "other products",
-      categoryPrecent: "40%",
-    )
+        categoryName: "other products",
+        categoryPrecent: "40%",
+        categoryImage: "images/others.png")
   ];
   @override
   Widget build(BuildContext context) {
