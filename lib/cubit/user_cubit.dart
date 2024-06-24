@@ -108,6 +108,7 @@ class UserCubit extends Cubit<UserState> {
   AdminLoginModel? admin;
   UserCountModel? count;
   LatestItemsModel? items;
+  AllUsersModel? dUser;
 
   uploadProfilePic(XFile image) {
     profilePic = image;
@@ -586,36 +587,57 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<void> allusers() async {
-    try {
-      emit(AllUsersLoading());
-      final response = await api.get(
-        EndPoints.admin_getAllUsers,
-      );
-      // count = UserCountModel.fromJson(response);
-      emit(AllUsersSuccess(
-          users: List<AllUsersModel>.from(
-              response.map((x) => AllUsersModel.fromJson(x)))));
-    } on ServerException catch (e) {
-      emit(AllUsersFailure(errmessage: e.errModel.errorMessage));
+  try {
+    emit(AllUsersLoading());
+    final response = await api.get(EndPoints.admin_getAllUsers);
+    
+    // Check if response is a List
+    if (response is List) {
+      // Map response to List<AllUsersModel>
+      List<AllUsersModel> usersList = response.map((x) => AllUsersModel.fromJson(x)).toList();
+      emit(AllUsersSuccess(users: usersList));
+
+      // If you need to get a specific user from the list
+      if (usersList.isNotEmpty) {
+        dUser = usersList[0]; // or any specific logic to get a user
+        await getIt<CacheHelper>().saveData(key: ApiKey.id, value: dUser!.id);
+      }
+    } else {
+      // Handle the case where response is not a List
+      emit(AllUsersFailure(errmessage: 'Unexpected response format'));
     }
+  } on ServerException catch (e) {
+    emit(AllUsersFailure(errmessage: e.errModel.errorMessage));
   }
+}
+
 
   Future<void> latestItems() async {
-    try {
-      emit(LatestItemsLoading());
-      final response = await api.get(
-        EndPoints.admin_latestItems,
-      );
-      
-      emit(LatestItemsSuccess(
-          items: List<LatestItemsModel>.from(
-              response.map((x) => LatestItemsModel.fromJson(x)))));
-              items = LatestItemsModel.fromJson(response);
-      await getIt<CacheHelper>().saveData(key: ApiKey.id, value: items!.id);
-    } on ServerException catch (e) {
-      emit(LatestItemsFailure(errmessage: e.errModel.errorMessage));
+  try {
+    emit(LatestItemsLoading());
+    
+    // Assuming the response is a JSON string
+    final response = await api.get(EndPoints.admin_latestItems);
+    
+    // Ensure response is a List
+    final List<dynamic> responseData = response as List<dynamic>;
+    
+    // Map the response to LatestItemsModel
+    final List<LatestItemsModel> items = responseData
+        .map((item) => LatestItemsModel.fromJson(item))
+        .toList();
+    
+    emit(LatestItemsSuccess(items: items));
+    
+    // Save the first item's id, if needed
+    if (items.isNotEmpty) {
+      await getIt<CacheHelper>().saveData(key: ApiKey.id, value: items.first.id);
     }
+  } on ServerException catch (e) {
+    emit(LatestItemsFailure(errmessage: e.errModel.errorMessage));
   }
+}
+
 
   Future<void> deleteItem(int id) async {
     try {
@@ -625,19 +647,19 @@ class UserCubit extends Cubit<UserState> {
     } on ServerException catch (e) {
       emit(DeleteItemFailure(errMessage: e.errModel.errorMessage));
     } catch (e) {
-      emit(DeleteFailure(errMessage: 'An unknown error occurred'));
+      emit(DeleteItemFailure(errMessage: 'An unknown error occurred'));
     }
   }
 
   Future<void> deleteUser(int id) async {
     try {
-      emit(DeleteItemLoading());
-      await api.delete(EndPoints.deleteItem(id));
-      emit(DeleteItemSuccess());
+      emit(DeleteUserLoading());
+      await api.delete(EndPoints.deleteUser(id));
+      emit(DeleteUserSuccess());
     } on ServerException catch (e) {
-      emit(DeleteItemFailure(errMessage: e.errModel.errorMessage));
+      emit(DeleteUserFailure(errMessage: e.errModel.errorMessage));
     } catch (e) {
-      emit(DeleteFailure(errMessage: 'An unknown error occurred'));
+      emit(DeleteUserFailure(errMessage: 'An unknown error occurred'));
     }
   }
 

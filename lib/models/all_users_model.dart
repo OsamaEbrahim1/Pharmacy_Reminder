@@ -16,7 +16,7 @@ class AllUsersModel {
 
   factory AllUsersModel.fromJson(Map<String, dynamic> jsonData) {
     return AllUsersModel(
-        id: jsonData[ApiKey.id],
+        id: jsonData[ApiKey.id] ?? 0,
         name: jsonData[ApiKey.name] ?? " ",
         email: jsonData[ApiKey.email] ?? " ",
         );

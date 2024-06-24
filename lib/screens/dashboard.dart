@@ -55,9 +55,28 @@ void initState() {
               .showSnackBar(SnackBar(content: Text(state.errmessage)));
         }
         if (state is DeleteItemSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('item deleted successfully'),
+            ),
+          );
           BlocProvider.of<UserCubit>(context).latestItems();
         }
         if (state is DeleteItemFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errMessage)),
+          );
+        }
+
+        if (state is DeleteUserSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('user deleted successfully'),
+            ),
+          );
+          BlocProvider.of<UserCubit>(context).allusers();
+        }
+        if (state is DeleteUserFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(state.errMessage)),
           );
@@ -334,6 +353,7 @@ void initState() {
                         icon: const Icon(Icons.delete, color: Colors.red, size: 24),
                         onPressed: () {
                           // Handle delete action
+                          context.read<UserCubit>().deleteUser(user.id);
                         },
                       ),
                     ),

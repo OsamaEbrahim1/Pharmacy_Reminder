@@ -27,6 +27,19 @@ void initState() {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         // TODO: implement listener
+        if (state is DeleteUserSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('user deleted successfully'),
+            ),
+          );
+          BlocProvider.of<UserCubit>(context).allusers();
+        }
+        else if (state is DeleteUserFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errMessage)),
+          );
+        }
       },
       builder: (context, state) {
         return Scaffold(
@@ -65,6 +78,7 @@ void initState() {
                                     color: Colors.red, size: 24),
                                 onPressed: () {
                                   // Handle delete action
+                                  context.read<UserCubit>().deleteUser(user.id);
                                 },
                               ),
                             ),

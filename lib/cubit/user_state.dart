@@ -323,3 +323,15 @@ final class DeleteItemFailure extends UserState {
 
   DeleteItemFailure({required this.errMessage});
 }
+
+
+//delete User
+final class DeleteUserSuccess extends UserState {}
+
+final class DeleteUserLoading extends UserState {}
+
+final class DeleteUserFailure extends UserState {
+  final String errMessage;
+
+  DeleteUserFailure({required this.errMessage});
+}

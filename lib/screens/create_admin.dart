@@ -39,11 +39,7 @@ class _CreateAdminState extends State<CreateAdmin> {
               content: Text('success'),
             ),
           );
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) {
-              return const Dashboard();
-            }),
-          );
+          Navigator.pushReplacementNamed(context, Dashboard.id);
         }else if(state is AdminSignInFailure){
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errmessage)));
         }
