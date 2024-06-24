@@ -629,10 +629,20 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
+  Future<void> deleteUser(int id) async {
+    try {
+      emit(DeleteItemLoading());
+      await api.delete(EndPoints.deleteItem(id));
+      emit(DeleteItemSuccess());
+    } on ServerException catch (e) {
+      emit(DeleteItemFailure(errMessage: e.errModel.errorMessage));
+    } catch (e) {
+      emit(DeleteFailure(errMessage: 'An unknown error occurred'));
+    }
+  }
 
 
 
-  
 }
 
 class NotificationStream {
