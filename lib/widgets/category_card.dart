@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/models/category_model.dart';
+import 'package:stroke_text/stroke_text.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key, required this.category});
@@ -24,11 +25,12 @@ class CategoryCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(4),
               child: Center(
-                child: Text(category.categoryName,
-                    style: const TextStyle(
-                        fontSize: 25,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold)),
+                child: StrokeText(
+                  text: category.categoryName,
+                  textStyle: TextStyle(fontSize: 25, color: Colors.white),
+                  strokeColor: Colors.black,
+                  strokeWidth: 3,
+                ),
               ),
             ),
             Row(
@@ -39,12 +41,13 @@ class CategoryCard extends StatelessWidget {
                       size: 30, color: Color(0xFF295c82)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10),
-                  child: Text(category.categoryPrecent,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                      )),
+                  padding: const EdgeInsets.only(left: 6),
+                  child: StrokeText(
+                  text: category.categoryPrecent,
+                  textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                  strokeColor: Colors.white,
+                  strokeWidth: 2,
+                ),
                 ),
               ],
             ),
