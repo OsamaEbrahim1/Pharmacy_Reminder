@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reminder_app/components/container.dart';
+import 'package:reminder_app/components/search_container.dart';
 import 'package:reminder_app/components/searchfield.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/cubit/user_state.dart';
@@ -70,31 +71,57 @@ class _AllItemsState extends State<AllItems> {
               },
             ),
           ),
-          body: state is AllProductsLoading
-              ? const Center(child: CircularProgressIndicator())
-              : state is AllProductsSuccess
-                  ? CustomScrollView(
-                      slivers: [
-                        SliverToBoxAdapter(
-                          child: Column(
-                            children: [
-                              const Padding(
-                                padding: EdgeInsets.all(12),
-                                child: SearchField(),
-                              ),
-                              Column(
-                                children: state.products.data.map((product) {
-                                  return CustomContainer(
-                                    product: product,
-                                  );
-                                }).toList(),
-                              ),
+          body: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(12),
+                child: SearchField(),
+              ),
+              Expanded(
+                child: state is AllProductsLoading || state is SearchLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : state is AllProductsSuccess
+                        ? CustomScrollView(
+                            slivers: [
+                              SliverToBoxAdapter(
+                                child: Column(
+                                  children: state.products.data.map((product) {
+                                    return CustomContainer(product: product);
+                                  }).toList(),
+                                ),
+                              )
                             ],
-                          ),
-                        )
-                      ],
-                    )
-                  : Container(),
+                          )
+                        : state is SearchSuccess
+                            ? state.data.items.isEmpty
+                                ? const Center(
+                                    child: Text(
+                                      "No results found",
+                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                : CustomScrollView(
+                                    slivers: [
+                                      SliverToBoxAdapter(
+                                        child: Column(
+                                          children: state.data.items.map((searchItem) {
+                                            return SearchContainer(search: searchItem);
+                                          }).toList(),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                            : state is SearchFailure
+                                ? Center(
+                                    child: Text(
+                                      state.errmessage,
+                                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                                    ),
+                                  )
+                                : Container(),
+              ),
+            ],
+          ),
         );
       },
     );

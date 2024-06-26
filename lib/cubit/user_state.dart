@@ -253,7 +253,7 @@ final class SearchLoading extends UserState {}
 final class SearchFailure extends UserState {
   final String errmessage;
 
-  SearchFailure({required this.errmessage});
+  SearchFailure({required this.errmessage, });
 }
 
 //Admin LogOut
@@ -297,7 +297,7 @@ final class AllUsersFailure extends UserState {
 }
 
 
-//all users
+//Latest Items
 final class LatestItemsSuccess extends UserState {
   final List<LatestItemsModel> items;
   LatestItemsSuccess({required this.items});

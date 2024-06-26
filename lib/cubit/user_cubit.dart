@@ -555,8 +555,13 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> search(String query) async {
+  Future<void> search() async {
     try {
+      String searchText = searchController.text.trim();
+      if (searchText.isEmpty) {
+        emit(SearchFailure(errmessage: "Please write anything to search for",));
+        return;
+      }
       emit(SearchLoading());
       final response = await api.post(
         EndPoints.search,
@@ -568,8 +573,8 @@ class UserCubit extends Cubit<UserState> {
       final searchResult = SearchModel.fromJson(response);
       emit(SearchSuccess(
           data: searchResult)); // Pass the response data to the state
-    } on ServerException catch (e) {
-      emit(SearchFailure(errmessage: e.errModel.errorMessage));
+    }on ServerException catch (e) {
+      emit(SearchFailure(errmessage: e.errModel.message));
     }
   }
 

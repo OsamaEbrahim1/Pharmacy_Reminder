@@ -9,13 +9,17 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      onChanged: (value) {
-            context.read<UserCubit>().search(value);
-          },
+      controller: context.read<UserCubit>().searchController,
       decoration: InputDecoration(
         labelText: 'Search....',
         hintText: 'Search',
-        prefixIcon: const Icon(Icons.search),
+        prefixIcon: IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: () {
+            context.read<UserCubit>().search();
+          },
+        ),
+        suffixIcon: const Icon(Icons.close),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -27,3 +31,5 @@ class SearchField extends StatelessWidget {
     );
   }
 }
+
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:reminder_app/components/exsearchfield.dart';
 import 'package:reminder_app/components/searchfield.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/cubit/user_state.dart';
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage>
                           ),
                           const Padding(
                             padding: EdgeInsets.all(12),
-                            child: SearchField(),
+                            child: ExSearchField(),
                           ),
                           // ignore: prefer_const_constructors
                           Padding(
