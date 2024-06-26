@@ -19,7 +19,12 @@ class SearchField extends StatelessWidget {
             context.read<UserCubit>().search();
           },
         ),
-        suffixIcon: const Icon(Icons.close),
+        suffixIcon:IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            context.read<UserCubit>().clearSearch();
+          },
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
         ),

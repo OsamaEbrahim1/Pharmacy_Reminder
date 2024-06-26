@@ -70,8 +70,16 @@ class SearchContainer extends StatelessWidget {
                               size: 24,
                             ),
                             onTap: () {
-                              Navigator.pushNamed(context, Edit.id,
-                                  arguments: product);
+                              if (product != null) {
+                                Navigator.pushNamed(context, Edit.id,
+                                    arguments: product);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Product data not available'),
+                                  ),
+                                );
+                              }
                             },
                           ),
                           Padding(
@@ -83,7 +91,15 @@ class SearchContainer extends StatelessWidget {
                                   size: 24,
                                 ),
                                 onTap: () {
-                                  context.read<UserCubit>().delete(product!.id);
+                                  if (product != null) {
+                                context.read<UserCubit>().delete(product!.id);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Product data not available'),
+                                  ),
+                                );
+                              }
                                 }),
                           ),
                         ],

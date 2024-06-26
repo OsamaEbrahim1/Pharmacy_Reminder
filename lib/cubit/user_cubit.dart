@@ -573,9 +573,17 @@ class UserCubit extends Cubit<UserState> {
       final searchResult = SearchModel.fromJson(response);
       emit(SearchSuccess(
           data: searchResult)); // Pass the response data to the state
-    }on ServerException catch (e) {
-      emit(SearchFailure(errmessage: e.errModel.message));
+    }on DioException catch (exception) {
+      final serverException = ServerException.fromDioException(exception);
+      emit(SearchFailure(errmessage: serverException.errModel.message ?? 'Unknown error'));
+    } catch (e) {
+      emit(SearchFailure(errmessage: 'Result Not Found'));
     }
+  }
+
+  void clearSearch() {
+    searchController.clear();
+    allData(); // Re-fetch all products when search is cleared
   }
 
   Future<void> userCount() async {
