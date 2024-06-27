@@ -15,7 +15,18 @@ class ExSearchField extends StatelessWidget {
       decoration: InputDecoration(
         labelText: 'Search....',
         hintText: 'Search',
-        prefixIcon: const Icon(Icons.search),
+        prefixIcon: IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: () {
+            //context.read<UserCubit>().search();
+          },
+        ),
+        suffixIcon:IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            context.read<UserCubit>().clearSearch();
+          },
+        ),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
         ),

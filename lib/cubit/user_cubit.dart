@@ -188,7 +188,7 @@ class UserCubit extends Cubit<UserState> {
       );
       emit(LogOutSuccess());
     } on ServerException catch (e) {
-      emit(LogOutFailure(errmessage: e.errModel.errorMessage));
+      emit(LogOutFailure(errmessage: e.errModel.message));
     }
   }
 
@@ -537,7 +537,7 @@ class UserCubit extends Cubit<UserState> {
       print(admin!.id);
       emit(AdminSignInSuccess());
     } on ServerException catch (e) {
-      emit(AdminSignInFailure(errmessage: e.errModel.errorMessage));
+      emit(AdminSignInFailure(errmessage: e.errModel.msg));
     } catch (e) {
       emit(AdminSignInFailure(errmessage: 'An unknown error occurred'));
     }
@@ -575,9 +575,9 @@ class UserCubit extends Cubit<UserState> {
           data: searchResult)); // Pass the response data to the state
     }on DioException catch (exception) {
       final serverException = ServerException.fromDioException(exception);
-      emit(SearchFailure(errmessage: serverException.errModel.message ?? 'Unknown error'));
+      emit(SearchFailure(errmessage: serverException.errModel.message));
     } catch (e) {
-      emit(SearchFailure(errmessage: 'Result Not Found'));
+      emit(SearchFailure(errmessage: 'No Results Found!'));
     }
   }
 

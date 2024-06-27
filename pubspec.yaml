@@ -85,6 +85,14 @@ flutter:
     - images/others.png
     - images/injections.png
     - images/syrup.png
+    - images/ahmed.jpg
+    - images/mohamed.jpg
+    - images/osama.jpg
+    - images/sama.jpg
+    - images/sandy.jpg
+    - images/samaa.jpg
+    - images/farah.jpg
+    - images/Date picker.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
   # For details regarding adding assets from package dependencies, see

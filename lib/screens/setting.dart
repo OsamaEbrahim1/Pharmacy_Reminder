@@ -5,6 +5,7 @@ import 'package:reminder_app/components/searchfield.dart';
 import 'package:reminder_app/core/api/end_points.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/cubit/user_state.dart';
+import 'package:reminder_app/screens/about_us.dart';
 import 'package:reminder_app/screens/log_in.dart';
 import 'package:reminder_app/screens/notifications.dart';
 import 'package:reminder_app/screens/profile.dart';
@@ -31,7 +32,6 @@ class _SettingsState extends State<Settings> {
               content: Text('logged out success'),
             ),
           );
-
           Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               return LogIn();
@@ -46,7 +46,6 @@ class _SettingsState extends State<Settings> {
         return Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-
             backgroundColor: const Color.fromARGB(255, 244, 243, 243),
             title: const Text(
               "Settings",
@@ -140,18 +139,24 @@ class _SettingsState extends State<Settings> {
                         color: Colors.black, size: 20),
                   ),
                   const SizedBox(height: 1),
-                  const ListTile(
-                    title: Text(
+                  ListTile(
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const AboutUs();
+                      }));
+                    },
+                    title: const Text(
                       "About",
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    leading: Icon(
+                    leading: const Icon(
                       Icons.error_outline,
                       color: Color(0xFF295c82),
                       size: 25,
                     ),
-                    trailing: Icon(Icons.arrow_forward_ios,
+                    trailing: const Icon(Icons.arrow_forward_ios,
                         color: Colors.black, size: 20),
                   ),
                   const SizedBox(height: 1),

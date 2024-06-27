@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reminder_app/cubit/user_cubit.dart';
 import 'package:reminder_app/cubit/user_state.dart';
-import 'package:reminder_app/models/all_products_model.dart';
 import 'package:reminder_app/models/all_users_model.dart';
-import 'package:reminder_app/models/latest_items_model.dart';
 import 'package:reminder_app/models/usercount_model.dart';
 import 'package:reminder_app/screens/admin.dart';
 import 'package:reminder_app/screens/create_admin.dart';
@@ -31,7 +29,7 @@ void initState() {
   super.initState();
   // Fetch user count and all users concurrently when the dashboard is initialized
   final userCubit = BlocProvider.of<UserCubit>(context); // Start fetching user count
-    //userCubit.allusers(); // Start fetching all users
+    userCubit.allusers(); // Start fetching all users
     userCubit.latestItems();
 }
 

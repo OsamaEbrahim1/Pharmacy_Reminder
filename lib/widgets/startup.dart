@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reminder_app/screens/create_admin.dart';
 import 'package:reminder_app/screens/log_in.dart';
-import 'package:reminder_app/screens/sign_up.dart';
 
 class StartUp extends StatelessWidget {
   static const String id = 'startUp';

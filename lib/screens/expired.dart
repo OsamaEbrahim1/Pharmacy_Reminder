@@ -32,7 +32,19 @@ class _ExpiredState extends State<Expired> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<UserCubit, UserState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is DeleteSuccess) {
+          // Navigator.pushReplacementNamed(context, RootScreen.id,
+          //     arguments: BlocProvider.of<UserCubit>(context).getUserProfile());
+          // const ScaffoldMessenger(child: Text('Record has been deleted'));
+          BlocProvider.of<UserCubit>(context).expiredData();
+        }
+        if (state is DeleteFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errMessage)),
+          );
+        }
+      },
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(

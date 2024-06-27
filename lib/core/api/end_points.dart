@@ -22,6 +22,8 @@ class EndPoints {
   static String admin_login = "admin/login";
   static String admin_logout = "admin/logout";
   static String search = "item/search";
+  static String searchsoonexpire = "item/searchsoonexpire";
+  static String searchexpire = "item/searchexpire";
   static String admin_countuser = "admin/countUsers";
   static String admin_getAllUsers = "admin/getAllUsers";
   static String admin_latestUsers = "admin/latestUsers";
